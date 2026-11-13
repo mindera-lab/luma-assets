@@ -1,0 +1,6 @@
+LUMA compact Supertonic 3
+
+Modified weight files: FP16 storage restored to FP32 for CPU inference.
+Original source: https://huggingface.co/supertone-oss-archive/supertonic-3/resolve/aafc6e32416a594460b32413efc49d7fe4ce6d46/
+
+All model files, modified or unmodified, remain subject to the attached BigScience Open RAIL-M LICENSE, including paragraph 5 and Attachment A use restrictions. This package is not covered by the exercise repository's Unlicense. No endorsement by Supertone is claimed.

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "id": "supertonic-3-fp16-v1",
+  "upstreamRevision": "aafc6e32416a594460b32413efc49d7fe4ce6d46",
+  "license": "BigScience-Open-RAIL-M",
+  "files": [
+    {
+      "path": "onnx/duration_predictor.onnx",
+      "asset": "onnx--duration_predictor.onnx.gz",
+      "bytes": 1994595,
+      "sha256": "6485e53cf6fb3fc6fdc454b13dfeca710abe355616792694b814637f3cf35833",
+      "downloadBytes": 1631045,
+      "downloadSHA256": "ff3cbbdebb0d007dc163f30e9dd83b33a7aa17d1b8374899969a993a05e44562",
+      "compression": "gzip"
+    },
+    {
+      "path": "onnx/text_encoder.onnx",
+      "asset": "onnx--text_encoder.onnx.gz",
+      "bytes": 18476459,
+      "sha256": "97c62d5bf7cec18b9e929029d10fe3b5f9617dd596c79704cbd6681fe45d0a6f",
+      "downloadBytes": 16796716,
+      "downloadSHA256": "dd12ebd9cf42e340a3f0c8f467878f8cb0815a3e58ce31117c789d3bbb9596d1",
+      "compression": "gzip"
+    },
+    {
+      "path": "onnx/vector_estimator.onnx",
+      "asset": "onnx--vector_estimator.onnx.gz",
+      "bytes": 128739107,
+      "sha256": "d12adff1723bab97a47000e640f1a9ca59ceec090b4da157d01126f03e5c9a2d",
+      "downloadBytes": 119672180,
+      "downloadSHA256": "098b6aa84bad8fecde0981ee818586a705e4cf8703680adefccb454ece0ea963",
+      "compression": "gzip"
+    },
+    {
+      "path": "onnx/vocoder.onnx",
+      "asset": "onnx--vocoder.onnx.gz",
+      "bytes": 50812181,
+      "sha256": "63df14cf0f58378079286a57a3d47f86808f96fbef09b72187e86363d3f669ab",
+      "downloadBytes": 47246290,
+      "downloadSHA256": "7d8648a266a187fb293b6a97cf7d9cef2c2795b3e5f6057e34e26a7541ffdc28",
+      "compression": "gzip"
+    },
+    {
+      "path": "onnx/tts.json",
+      "asset": "onnx--tts.json.gz",
+      "bytes": 8253,
+      "sha256": "42078d3aef1cd43ab43021f3c54f47d2d75ceb4e75f627f118890128b06a0d09",
+      "downloadBytes": 1124,
+      "downloadSHA256": "8f76fb944e419dfcc2e31049c3090ed4bc98234bdcc0e9b24dc19cec1130929c",
+      "compression": "gzip"
+    },
+    {
+      "path": "onnx/unicode_indexer.json",
+      "asset": "onnx--unicode_indexer.json.gz",
+      "bytes": 277676,
+      "sha256": "9bf7346e43883a81f8645c81224f786d43c5b57f3641f6e7671a7d6c493cb24f",
+      "downloadBytes": 25048,
+      "downloadSHA256": "80141beb9da76c5016be9433f85206c0a58a92ebe7c0b21ad8418b69137e6643",
+      "compression": "gzip"
+    },
+    {
+      "path": "voice_styles/F1.json",
+      "asset": "voice_styles--F1.json.gz",
+      "bytes": 292046,
+      "sha256": "bbdec6ee00231c2c742ad05483df5334cab3b52fda3ba38e6a07059c4563dbc2",
+      "downloadBytes": 122574,
+      "downloadSHA256": "bbd9f624e9bb159f8ae01574ac5885a9fb69f0a06a186bec8a8cf87b7bb5f2ea",
+      "compression": "gzip"
+    },
+    {
+      "path": "LICENSE",
+      "asset": "LICENSE.gz",
+      "bytes": 15007,
+      "sha256": "0d944a9110fed9a9602d60e0423a272903e7bd21ab060490774efc77c2275e9f",
+      "downloadBytes": 5695,
+      "downloadSHA256": "ce5fb142ae575bb01dead6962f2da4ddef9dfd5ec4b77598fe225197242f3c16",
+      "compression": "gzip"
+    },
+    {
+      "path": "NOTICE.txt",
+      "asset": "NOTICE.txt.gz",
+      "bytes": 494,
+      "sha256": "b998378ec1625d3d7c440761eab191d3d27aa48bc01335139b92f7e5176a3661",
+      "downloadBytes": 353,
+      "downloadSHA256": "570823fc5ecb47a8d8af18bacbe7747d6d810ef17a4b00507b05a28336688961",
+      "compression": "gzip"
+    }
+  ],
+  "downloadBytes": 185501025
+}

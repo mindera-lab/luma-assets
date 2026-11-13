@@ -1,0 +1,63 @@
+name: Publish compact Supertonic voice
+on:
+  push:
+    branches: [main]
+    paths: ['voice/build-voice-assets.py', 'voice/expected-manifest.json', '.github/workflows/voice-release.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: compact-voice-v1
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned model tools
+        run: python -m pip install onnx==1.19.1 onnxruntime==1.23.2 numpy==2.3.4
+      - name: Build from checksum-pinned upstream weights
+        run: python voice/build-voice-assets.py --source "$RUNNER_TEMP/upstream" --output "$RUNNER_TEMP/compact"
+      - name: Verify model identity and compressed roundtrip
+        run: |
+          python - <<'PY'
+          import gzip, hashlib, json, os, pathlib, shutil
+          root = pathlib.Path(os.environ['RUNNER_TEMP'])
+          actual = json.loads((root / 'compact/manifest.json').read_text())
+          expected = json.loads(pathlib.Path('voice/expected-manifest.json').read_text())
+          assert actual['id'] == expected['id']
+          assert [(f['path'], f['bytes'], f['sha256']) for f in actual['files']] == [(f['path'], f['bytes'], f['sha256']) for f in expected['files']]
+          release = root / 'release'
+          release.mkdir()
+          for f in actual['files']:
+              packed = root / 'compact' / (f['path'] + '.gz')
+              with gzip.open(packed, 'rb') as stream:
+                  assert hashlib.file_digest(stream, 'sha256').hexdigest() == f['sha256']
+              shutil.copyfile(packed, release / f['asset'])
+          for name in ['manifest.json', 'LICENSE', 'NOTICE.txt']:
+              shutil.copyfile(root / 'compact' / name, release / name)
+          PY
+      - name: Publish immutable release after every file is uploaded
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          tag=supertonic-3-fp16-v1
+          if gh release view "$tag" --json isDraft --jq '.isDraft' > "$RUNNER_TEMP/draft" 2>/dev/null; then
+            if [ "$(cat "$RUNNER_TEMP/draft")" != true ]; then
+              echo 'Already published; release assets will not be overwritten.'
+              exit 0
+            fi
+          else
+            gh release create "$tag" --draft --target "$RELEASE_COMMIT" --title 'Supertonic 3 · LUMA compact FP16 v1' --notes-file voice/README.md
+          fi
+          gh release upload "$tag" "$RUNNER_TEMP"/release/* --clobber
+          gh release edit "$tag" --draft=false --latest=false
